@@ -1,11 +1,34 @@
+def get_float(prompt):
+    while True:
+        try:
+            value = float(input(prompt))
+            if value < 0:
+                print("Please enter a positive number.")
+            else:
+                return value
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+def get_int(prompt):
+    while True:
+        try:
+            value = int(input(prompt))
+            if value <= 0:
+                print("Please enter a number greater than zero.")
+            else:
+                return value
+        except ValueError:
+            print("Invalid input. Please enter an integer.")
+
 print("Welcome to the tip calculator!")
-bill = float(input("What was the total bill? $"))
-tip = int(input("What percentage tip would you like to give? 10 12 15 "))
-people = int(input("How many people to split the bill? "))
+
+bill = get_float("What was the total bill? $")
+tip = get_float("What percentage tip would you like to give? (e.g., 10, 12, 15): ")
+people = get_int("How many people to split the bill? ")
 
 tip_percent = tip / 100
 total_tip = bill * tip_percent
 total_bill = bill + total_tip
-splitted_bill = total_bill / people
-bill_per_person = round(splitted_bill, 2)
-print(f'Each person should pay: ${bill_per_person}')
+bill_per_person = total_bill / people
+
+print(f"Each person should pay: ${bill_per_person:.2f}")
